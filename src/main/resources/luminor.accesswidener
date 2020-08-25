@@ -1,0 +1,19 @@
+accessWidener v1 named
+
+accessible method net/minecraft/world/chunk/light/LightStorage get (J)I
+accessible method net/minecraft/world/chunk/light/LightStorage getLight (J)I
+accessible method net/minecraft/world/chunk/light/LightStorage set (JI)V
+accessible method net/minecraft/world/chunk/light/LightStorage hasLight (J)Z
+accessible method net/minecraft/world/chunk/light/LightStorage updateAll ()V
+accessible method net/minecraft/world/chunk/light/LightStorage getLightArray (JZ)Lnet/minecraft/world/chunk/ChunkNibbleArray;
+
+accessible method net/minecraft/world/chunk/light/SkyLightStorage isAboveMinHeight (I)Z
+accessible method net/minecraft/world/chunk/light/SkyLightStorage isLightEnabled (J)Z
+accessible method net/minecraft/world/chunk/light/SkyLightStorage isAboveTopmostLightArray (J)Z
+accessible method net/minecraft/world/chunk/light/SkyLightStorage method_15565 (J)Z
+
+accessible method net/minecraft/world/chunk/light/LevelPropagator updateLevel (JJIIIZ)V
+accessible field  net/minecraft/world/chunk/light/LevelPropagator levelCount I
+accessible field  net/minecraft/world/chunk/light/LevelPropagator pendingUpdates Lit/unimi/dsi/fastutil/longs/Long2ByteMap;
+
+accessible method net/minecraft/world/chunk/light/ChunkBlockLightProvider getLightSourceLuminance (J)I
