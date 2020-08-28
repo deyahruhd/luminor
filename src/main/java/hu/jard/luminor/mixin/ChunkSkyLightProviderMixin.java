@@ -32,6 +32,8 @@ public abstract class ChunkSkyLightProviderMixin extends ChunkLightProvider<SkyL
     protected void getPropagatedLevel(long sourceId, long targetId, int level, CallbackInfoReturnable <Integer> info) {
         info.cancel ();
 
+        info.setReturnValue (0);
+        /*
         if (targetId == Long.MAX_VALUE) {
             info.setReturnValue (Luminor.MAX_LIGHT_LEVEL);
         } else {
@@ -92,17 +94,18 @@ public abstract class ChunkSkyLightProviderMixin extends ChunkLightProvider<SkyL
                         }
                     } else {
                         boolean bl2 = sourceId == Long.MAX_VALUE || bl && j > m;
-                        info.setReturnValue (bl2 && level == 0 && mutableInt.getValue() == 0 ? 0 : level + Math.max(direction.attenuation, mutableInt.getValue()));
+                        info.setReturnValue (bl2 && level == 0 && mutableInt.getValue() == 0 ? 0 : level + direction.attenuation);
                     }
                 }
             }
-        }
+        }*/
     }
 
     @Inject (at = @At ("HEAD"), method = "propagateLevel(JIZ)V", cancellable = true)
     protected void propagateLevel(long id, int level, boolean decrease, CallbackInfo info) {
         info.cancel ();
 
+        /*
         long l = ChunkSectionPos.fromGlobalPos(id);
         int i = BlockPos.unpackLongY(id);
         int j = ChunkSectionPos.getLocalCoord(i);
@@ -121,13 +124,13 @@ public abstract class ChunkSkyLightProviderMixin extends ChunkLightProvider<SkyL
         long p = BlockPos.add(id, 0, -1 - o * 16, 0);
         long q = ChunkSectionPos.fromGlobalPos(p);
         if (l == q || this.lightStorage.hasLight(q)) {
-            this._propagateLevel(id, p, level, Luminor.FACE_ATTENUATION, decrease);
+            this.propagateLevel(id, p, level, decrease);
         }
 
         long r = BlockPos.offset(id, Direction.UP);
         long s = ChunkSectionPos.fromGlobalPos(r);
         if (l == s || this.lightStorage.hasLight(s)) {
-            this._propagateLevel(id, r, level, Luminor.FACE_ATTENUATION, decrease);
+            this.propagateLevel(id, r, level, decrease);
         }
 
         int posX = BlockPos.unpackLongX (id);
@@ -141,12 +144,12 @@ public abstract class ChunkSkyLightProviderMixin extends ChunkLightProvider<SkyL
                 long u = BlockPos.asLong (posX + direction.x, posY + direction.y - t, posZ + direction.z);
                 long v = ChunkSectionPos.fromGlobalPos(u);
                 if (l == v) {
-                    this._propagateLevel(id, u, level, direction.attenuation, decrease);
+                    this.propagateLevel(id, u, level, decrease);
                     break;
                 }
 
                 if (this.lightStorage.hasLight (v)) {
-                    this._propagateLevel(id, u, level, direction.attenuation, decrease);
+                    this.propagateLevel(id, u, level, decrease);
                 }
 
                 ++t;
@@ -154,12 +157,17 @@ public abstract class ChunkSkyLightProviderMixin extends ChunkLightProvider<SkyL
                     break;
                 }
             }
-        }
+        }*/
 
     }
 
     @Inject (at = @At ("HEAD"), method = "recalculateLevel(JJI)I", cancellable = true)
     protected void recalculateLevel(long id, long excludedId, int maxLevel, CallbackInfoReturnable <Integer> info) {
+        info.cancel();
+
+        info.setReturnValue (0);
+
+        /*
         info.cancel ();
 
         int i = maxLevel;
@@ -232,11 +240,10 @@ public abstract class ChunkSkyLightProviderMixin extends ChunkLightProvider<SkyL
             }
         }
 
-        info.setReturnValue (i);
+        info.setReturnValue (i);*/
     }
 
-
-
+    /*
     protected final void _propagateLevel(long sourceId, long targetId, int level, int attenuation, boolean decrease) {
         int i = this.pendingUpdates.get(targetId) & 255;
         int j = MathHelper.clamp(this.getPropagatedLevel(sourceId, targetId, level), 0, this.levelCount - attenuation);
@@ -258,7 +265,7 @@ public abstract class ChunkSkyLightProviderMixin extends ChunkLightProvider<SkyL
             }
         }
     }
-
+    */
     @Shadow
     protected int getPropagatedLevel(long sourceId, long targetId, int level) {
         return 0;
