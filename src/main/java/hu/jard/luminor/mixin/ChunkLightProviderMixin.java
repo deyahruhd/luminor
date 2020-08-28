@@ -44,7 +44,6 @@ public abstract class ChunkLightProviderMixin<M extends ChunkToNibbleArrayMap<M>
      */
     @ModifyArg (method="getStateForLighting", at=@At (value="INVOKE", target="Lorg/apache/commons/lang3/mutable/MutableInt;setValue(I)V"), index=0)
     private int increaseMutableIntReturn (int in) {
-        System.out.println (in * Luminor.LIGHT_SUBDIVS);
         // Scale the default block light level by the number of sublevels
         return in * Luminor.LIGHT_SUBDIVS;
     }
